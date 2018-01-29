@@ -17,7 +17,7 @@ class SearchBar extends Component {
         e.preventDefault();
         var location = this.refs.location.value;
         if ( location.length == 0 ) 
-          return ;
+        return ;
         this.props.ShowLoading(true)
         this.props.FetchWeather({city:this.state.term,countrycode:'de'})
     }

@@ -10,7 +10,9 @@ class WeatherCard extends Component {
     }
 
     render() {
+        debugger
         let weatherImgUrl= "assets/img/unknown.png"
+        let avgTemp= parseInt((parseInt(this.props.high)  + parseInt(this.props.low))/2)
         if(this.weatherImages[this.props.text.replace(/\s/g, '')])
             weatherImgUrl= "assets/img/" + this.weatherImages[this.props.text.replace(/\s/g, '')]
 
@@ -24,7 +26,9 @@ class WeatherCard extends Component {
                 </ul>
                 <br />
                 <div className="sun" > <img src={weatherImgUrl} width={40} height={40} />  </div>
-                <span className="temp">76°</span>
+                <span className="temp">{avgTemp}</span>
+
+
                 <span>
                     <ul className="variations">
                         <li>{this.props.text}</li>
@@ -42,6 +46,6 @@ class WeatherCard extends Component {
     }
 }
 
-const mapStateToProps = ({weather, pageIndex}) => ({ weather, pageIndex })
+const mapStateToProps = ({ pageIndex}) => ({ pageIndex })
 
 export default connect(mapStateToProps)(WeatherCard)

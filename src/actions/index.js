@@ -12,7 +12,7 @@ export function FetchWeather(params = null) {
     //console.log("in action creater:",request)
     return {
         type:FETCH_WEATHER,
-        payload: request
+        payload: request,
     }
 }
 

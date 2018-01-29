@@ -9,7 +9,6 @@ class WeatherCardContainer extends Component {
         super(props)
     }
     componentWillReceiveProps(nextProps) {
-        debugger
         if(nextProps.weather.length>0){
             this.data = nextProps.weather[0].query.results.channel
             this.forecast= this.data.item.forecast
@@ -18,7 +17,6 @@ class WeatherCardContainer extends Component {
     }
 
     render() {
-        debugger
         if(this.props.showLoading)
             return <div className="col-md-12 alert alert-warning search-message">Loading..</div>
         if(!this.data)

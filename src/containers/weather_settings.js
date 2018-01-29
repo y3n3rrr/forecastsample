@@ -23,6 +23,8 @@ class WeatherSettings extends Component {
         : null
     }
     render() {
+        if(this.props.showLoading)
+            return <div></div>;
         return (
             <div className="row">
                 <div className="col-md-12">
@@ -38,7 +40,7 @@ class WeatherSettings extends Component {
 function mapActionCreaterToProps(dispatch) {
     return bindActionCreators({ FetchWeather, UpdatePageIndex }, dispatch)
 }
-const mapStateToProps = ({ pageIndex }) => ({ pageIndex })
+const mapStateToProps = ({ pageIndex,showLoading }) => ({ pageIndex,showLoading })
 
 export default connect(
     mapStateToProps, mapActionCreaterToProps
