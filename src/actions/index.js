@@ -1,5 +1,7 @@
 import axios from 'axios'
 export const FETCH_WEATHER='FETCH_WEATHER'
+export const UPDATE_PAGE_INDEX='UPDATE_PAGE_INDEX'
+export const SHOW_LOADING='SHOW_LOADING'
 
 
 
@@ -10,7 +12,23 @@ export function FetchWeather(params = null) {
     //console.log("in action creater:",request)
     return {
         type:FETCH_WEATHER,
-        payload:request
+        payload: request
     }
 }
+
+export function UpdatePageIndex(params = null) {
+    debugger
+    return {
+        type:UPDATE_PAGE_INDEX,
+        payload:params
+    }
+}
+
+export function ShowLoading(params = false) {
+    return {
+        type:SHOW_LOADING,
+        payload:params
+    }
+}
+
 

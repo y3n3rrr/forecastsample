@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
-import {FetchWeather} from '../actions'
+import {FetchWeather,ShowLoading} from '../actions'
 
 class SearchBar extends Component {
     constructor(props){
@@ -18,8 +18,8 @@ class SearchBar extends Component {
         var location = this.refs.location.value;
         if ( location.length == 0 ) 
           return ;
-        this.props.FetchWeather({city:this.state.term,countrycode:'tr'})
-        this.setState({term:''})
+        this.props.ShowLoading(true)
+        this.props.FetchWeather({city:this.state.term,countrycode:'de'})
     }
 
     render() {
@@ -42,7 +42,7 @@ class SearchBar extends Component {
 }
 
 function mapActionCreaterToProps(dispatch) {
-    return bindActionCreators({FetchWeather},dispatch)
+    return bindActionCreators({FetchWeather, ShowLoading},dispatch)
 }
 
 export default connect(

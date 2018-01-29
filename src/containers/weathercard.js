@@ -8,11 +8,7 @@ class WeatherCard extends Component {
         this.weatherImages = {"Sunny":"sunny.png", "Cloudy":"cloudy.png" ,"PartlyCloudy":"partlycloudy.png",  "MostlyCloudy":"mostlycloudy.png", "MostlySunny":"mostlysunny.png", "RainAndSnow":"rainandsnow.jpg", "RainAndSunny":"rainandsunny.gif", "ScatteredShowers":"scatteredshowers.gif","Showers":"showers.gif", "Rain":"rain.png"}
 
     }
-    componentWillReceiveProps(nextProps) {
-        var asd = nextProps;
-        debugger
-    }
-    
+
     render() {
         let weatherImgUrl= "assets/img/unknown.png"
         if(this.weatherImages[this.props.text.replace(/\s/g, '')])
@@ -46,6 +42,6 @@ class WeatherCard extends Component {
     }
 }
 
-const mapStateToProps = ({weather}) => ({ weather })
+const mapStateToProps = ({weather, pageIndex}) => ({ weather, pageIndex })
 
 export default connect(mapStateToProps)(WeatherCard)
