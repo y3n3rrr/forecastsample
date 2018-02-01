@@ -24,11 +24,3 @@ export function UpdatePageIndex(params = null) {
     }
 }
 
-export function ShowLoading(params = false) {
-    return {
-        type:SHOW_LOADING,
-        payload:params
-    }
-}
-
-

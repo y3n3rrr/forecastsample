@@ -5,7 +5,7 @@ import SearchBar from './containers/searchbar'
 import WeatherContainer from './containers/weather_container'
 import WeatherSettings from './containers/weather_settings'
 
-class App extends Component {
+export default class App extends Component {
   constructor(props){
     super(props)
   }
@@ -19,7 +19,3 @@ class App extends Component {
     );
   }
 }
-
-
-const mapStateToProps = ({showLoading}) => ({ showLoading })
-export default connect(mapStateToProps)(App)

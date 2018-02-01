@@ -10,7 +10,6 @@ class WeatherCard extends Component {
     }
 
     render() {
-        debugger
         let weatherImgUrl= "assets/img/unknown.png"
         let avgTemp= parseInt((parseInt(this.props.high)  + parseInt(this.props.low))/2)
         if(this.weatherImages[this.props.text.replace(/\s/g, '')])

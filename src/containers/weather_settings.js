@@ -40,7 +40,7 @@ class WeatherSettings extends Component {
 function mapActionCreaterToProps(dispatch) {
     return bindActionCreators({ FetchWeather, UpdatePageIndex }, dispatch)
 }
-const mapStateToProps = ({ pageIndex,showLoading }) => ({ pageIndex,showLoading })
+const mapStateToProps = ({ pageIndex }) => ({ pageIndex })
 
 export default connect(
     mapStateToProps, mapActionCreaterToProps
