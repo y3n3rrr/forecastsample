@@ -2,19 +2,29 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import WeatherCard from './weathercard'
-
+import {isLoading} from '../actions'
 class WeatherCardContainer extends Component {
     constructor(props) {
         super(props)
+        this.showNotFoundLocationMessage=false;
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps.weather.length>0){
-            this.data = nextProps.weather[0].query.results.channel
+        debugger
+        if(nextProps.weather && nextProps.weather.query.results){
+            this.data = nextProps.weather.query.results.channel
+            this.showNotFoundLocationMessage=false;
         }
+        else
+            this.showNotFoundLocationMessage=true;
     }
 
     render() {
         debugger
+        if(this.props.showLoading)
+            return <div className="col-md-12 alert alert-warning search-message">Loading..</div>
+        if(this.showNotFoundLocationMessage)
+            return <div className="col-md-12 alert alert-danger search-message">location cant found..</div>
+
         if(!this.data)
         return <div className="col-md-12 alert alert-info search-message">Search for a city</div>
         
@@ -38,6 +48,8 @@ class WeatherCardContainer extends Component {
         )
     }
 }
-
-const mapStateToProps = ({weather,pageIndex}) => ({ weather,pageIndex })
-export default connect(mapStateToProps,null)(WeatherCardContainer)
+function mapActionCreaterToProps(dispatch) {
+    return bindActionCreators({isLoading}, dispatch)
+}
+const mapStateToProps = ({weather,pageIndex,showLoading}) => ({ weather,pageIndex,showLoading })
+export default connect(mapStateToProps,mapActionCreaterToProps)(WeatherCardContainer)

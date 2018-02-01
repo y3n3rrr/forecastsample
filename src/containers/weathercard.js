@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 class WeatherCard extends Component {
     constructor(props) {
         super(props)
-        this.weatherImages = {"Sunny":"sunny.png", "Cloudy":"cloudy.png" ,"PartlyCloudy":"partlycloudy.png",  "MostlyCloudy":"mostlycloudy.png", "MostlySunny":"mostlysunny.png", "RainAndSnow":"rainandsnow.jpg", "RainAndSunny":"rainandsunny.gif", "ScatteredShowers":"scatteredshowers.gif","Showers":"showers.gif", "Rain":"rain.png"}
+        this.weatherImages = {"Sunny":"sunny.png", "Cloudy":"cloudy.png" ,"PartlyCloudy":"partlycloudy.png",  "MostlyCloudy":"mostlycloudy.png", "MostlySunny":"mostlysunny.png", "RainAndSnow":"Rain And Snow.png", "RainAndSunny":"rainandsunny.gif", "ScatteredShowers":"scatteredshowers.gif","Showers":"showers.gif", "Rain":"rain.png"}
 
     }
 
@@ -24,7 +24,7 @@ class WeatherCard extends Component {
                     <li />
                 </ul>
                 <br />
-                <div className="sun" > <img src={weatherImgUrl} width={40} height={40} />  </div>
+                <div className="sun" > <img title={this.props.text} src={weatherImgUrl} width={40} height={40} />  </div>
                 <span className="temp">{avgTemp}</span>
 
 

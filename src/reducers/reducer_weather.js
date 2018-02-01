@@ -1,9 +1,10 @@
 import { FETCH_WEATHER, UPDATE_PAGE_INDEX } from "../actions";
 
-export default (state = [], action) => {
+export default (state=null, action) => {
     switch (action.type) {
         case FETCH_WEATHER:
-            return [action.payload.data, ...state]
+        console.log("in action creater:",action.payload)
+            return action.payload.data
         default:
             return state;
     }
