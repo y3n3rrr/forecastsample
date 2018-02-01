@@ -10,24 +10,26 @@ class WeatherCardContainer extends Component {
     componentWillReceiveProps(nextProps) {
         if(nextProps.weather.length>0){
             this.data = nextProps.weather[0].query.results.channel
-            this.forecast= this.data.item.forecast
         }
     }
 
     render() {
         debugger
-        this.pageIndex = this.props.pageIndex
         if(!this.data)
-            return <div className="col-md-12 alert alert-info search-message">Search for a city</div>
-        const cards= this.forecast.filter((val,i)=> (i>=this.pageIndex*3  && i<(this.pageIndex+1)*3)).map((val, i)=>{
+        return <div className="col-md-12 alert alert-info search-message">Search for a city</div>
+        
+        const {pageIndex} = this.props
+        const {forecast}= this.data.item
+        const cards= forecast.filter((val,i)=> (i>=pageIndex*3  && i<(pageIndex+1)*3)).map((val, i)=>{
             return <div className="col-md-4"><WeatherCard {...val}/></div>
         })
-        const cityName = this.data.location.city;
-        const description = this.description;
+        const {city, country} = this.data.location;
+        const temperature = this.data.units.temperature;
         return (
             <div className="row"> 
             <div className="col-md-12">
-                <span className="location"><strong>{this.data.title}</strong></span>
+                <span className="location"><strong>{city}, {country}</strong></span>
+                <div className="variations temperature">Temperature:({temperature})</div>
             </div>
             <div className="col-md-12">
                 {cards}
