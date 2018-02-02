@@ -13,7 +13,6 @@ class WeatherCard extends Component {
     }
     
     render() {
-        
         return (
             <div className="card">
                 <span className="city">{this.props.date}, {this.props.day}</span>

@@ -6,6 +6,5 @@ const rootReducer = combineReducers({
     weather:reducer_weather,
     pageIndex:reducer_pageIndex,
     showLoading:reducer_loader,
-   // showLoading:reducer_pageIndex
 });
 export default rootReducer;
