@@ -29,7 +29,29 @@ class WeatherSettings extends Component {
             <div className="row">
                 <div className="col-md-12">
                     <div className="col-md-3">{this.prevButton()}</div>
-                    <div className="col-md-6"> </div>
+                    <div className="col-md-6"> 
+
+
+                    <div className="well well-sm text-center">
+	    <h3>Radio:</h3>
+      <div className="dlk-radio btn-group">
+
+	   <label className="btn btn-info">
+	       <input name="choices[1]" className="form-control" type="radio" value="3" defaultChecked="checked" />
+	       <i className="fa fa-check glyphicon glyphicon-ok"></i>
+       </label>
+	   <label className="btn btn-warning">
+	       can be labeled
+       </label>
+       	   <label className="btn btn-danger">
+	       <input name="choices[1]" className="form-control" type="radio" value="0" defaultChecked="checked" />
+	       <i className="fa fa-check glyphicon glyphicon-remove"></i>
+       </label>
+    </div>
+    </div>
+
+
+</div>
                     <div className="col-md-3">{this.nextButton()}</div>
                 </div>
             </div>

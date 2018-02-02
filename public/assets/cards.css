@@ -51,9 +51,7 @@
   .mph {
      font-size:.8em;
   }
-  .speed:before {
-    content:url('https://i.imgur.com/luN0Jmq.png');
-  }
+
   .forecast {
     width:100%;
     margin:0 auto;
@@ -85,3 +83,18 @@
   .sunny {
     content: url('https://i.imgur.com/RdBr2SD.png');
   }
+  
+  .dlk-radio input[type="radio"],
+.dlk-radio input[type="checkbox"] 
+{
+	margin-left:-99999px;
+	display:none;
+}
+.dlk-radio input[type="radio"] + .fa ,
+.dlk-radio input[type="checkbox"] + .fa {
+     opacity:0.15
+}
+.dlk-radio input[type="radio"]:checked + .fa,
+.dlk-radio input[type="checkbox"]:checked + .fa{
+    opacity:1
+}
