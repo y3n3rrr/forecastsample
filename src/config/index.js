@@ -21,9 +21,9 @@ export default {
     categoryField: "country",
     categoryAxis: {
         gridPosition: "start",
-        labelRotation: 90
+        labelRotation: 45
     },
     export: {
         enabled: true
-     }
+    }
 }

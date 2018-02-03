@@ -6,6 +6,7 @@ import { isLoading } from '../actions'
 
 import AmCharts from "@amcharts/amcharts3-react";
 import weather_config from '../config/'
+import { getAverage } from '../utility'
 
 class WeatherCardContainer extends Component {
     constructor(props) {
@@ -15,25 +16,33 @@ class WeatherCardContainer extends Component {
         this.forecast = []
     }
     componentWillReceiveProps(nextProps) {
-        if (this.showNotFoundLocationMessage = (nextProps.weather && nextProps.weather.query.results)) {
+        this.showNotFoundLocationMessage = (nextProps.weather && nextProps.weather.query.results)
+        if (nextProps.weather && nextProps.weather.query.results) {
             this.data = nextProps.weather.query.results.channel
             this.forecast = this.data.item.forecast;
             this.chartConfig.dataProvider = [];
-            debugger
             this.forecast.map((val, i) => {
-                this.chartConfig.dataProvider.push({ visits: val.high, country: val.date + ", " + val.day, color: '#' + ((1 << 24) * Math.random() | 0).toString(16), temp: this.data.units.temperature })
+                this.chartConfig.dataProvider.push({
+                    visits: getAverage(val.high, val.low), // using 'high' value of forecast object in chart
+                    country: val.date + ", " + val.day, // setting axis labels of chart
+                    color: '#' + ((1 << 24) * Math.random() | 0).toString(16), // setting random colors for columns of the chart 
+                    temp: this.data.units.temperature
+                })
+                return null;
             })
         }
     }
 
     render() {
+        debugger
         if (this.props.showLoading)
-            return <div className="col-md-12 alert alert-warning search-message">Loading..</div>
+            return <div className="alert alert-warning search-message"><div className="loader"></div> Loading... </div>
         if (!this.showNotFoundLocationMessage)
-            return <div className="col-md-12 alert alert-danger search-message">location cant found..</div>
+            return <div className="alert alert-danger search-message"> <i className="fa fa-times"></i> No location found for this entry...</div>
         if (!this.data)
-            return <div className="col-md-12 alert alert-info search-message">Search for a city</div>
+            return <div className="alert alert-info search-message">Search for a city</div>
 
+        // if application state got required data, list weather card items
         const { pageIndex } = this.props
         const cards = this.forecast.filter((val, i) => (i >= pageIndex * 3 && i < (pageIndex + 1) * 3)).map((val, i) => {
             return <div key={i} className="col-md-4"><WeatherCard atmosphere={this.data.atmosphere} {...val} /></div>
@@ -42,14 +51,12 @@ class WeatherCardContainer extends Component {
         const { temperature } = this.data.units;
         return (
             <div className="row">
-                <div className="col-md-12">
-                    <span className="location"><strong>{city}, {country}</strong></span>
-                    <div className="variations temperature">Temperature:({temperature})</div>
-                </div>
-                <div className="col-md-12">
+                <span className="location"><strong>{city}, {country}</strong></span>
+                <div className="variations temperature">Temperature:(&deg;{temperature})</div>
+                <div className="row">
                     {cards}
                 </div>
-                <div className="col-md-12">
+                <div className="row">
                     <AmCharts.React
                         style={{
                             width: "100%",

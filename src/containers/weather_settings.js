@@ -1,40 +1,53 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { FetchWeather, UpdatePageIndex } from '../actions'
+import { isLoading, FetchWeather, UpdatePageIndex } from '../actions'
 
 class WeatherSettings extends Component {
     constructor(props) {
         super(props)
+        this.appData = {}
     }
-    handleOnChange = (val) => {
+    componentWillReceiveProps(nextProps) {
+        this.appData = nextProps.weather != null ? nextProps.weather.query.results : nextProps.weather;
+    }
+
+
+    handleOnPageChange = (val) => {
         this.props.UpdatePageIndex(val)
     }
+
+    handleOnTemperatureChange = (e) => {
+        const { city } = this.appData.channel.location
+        this.props.isLoading(true)
+        this.props.FetchWeather({ city: city, countrycode: 'de', temperature: e.target.value })
+    }
+
     prevButton() {
-        return this.props.pageIndex > 0 ? <button type="button" onClick={() => this.handleOnChange(-1)} className="btn btn-primary btn-arrow-left">Previous</button> : null
+        return this.props.pageIndex > 0 ? <button type="button" onClick={() => this.handleOnPageChange(-1)} className="btn btn-primary btn-arrow-left pull-right">Previous</button> : null
     }
     nextButton() {
-        return this.props.pageIndex < 3 ? <button type="button" onClick={() => this.handleOnChange(1)} className="btn btn-primary btn-arrow-right">Next</button> : null
+        return this.props.pageIndex < 3 ? <button type="button" onClick={() => this.handleOnPageChange(1)} className="btn btn-primary btn-arrow-right pull-left">Next</button> : null
     }
     render() {
-        if (this.props.showLoading)
-            return <div></div>;
+        if (this.props.showLoading || !this.appData || !this.appData.channel)
+            return null;
         return (
             <div className="row">
-                <div className="col-md-12">
+                <div className="weather-settings">
                     <div className="col-md-3">{this.prevButton()}</div>
                     <div className="col-md-6">
                         <div className="well well-sm text-center">
-                            <h3>Radio:</h3>
+                            <h5>You can change temperature 'C' to 'F' using these buttons</h5>
                             <div className="dlk-radio btn-group">
                                 <label className="btn btn-info">
-                                    <input name="choices[1]" className="form-control" type="radio" value="3" defaultChecked="checked" />
-                                    <i className="fa fa-check glyphicon glyphicon-ok"></i>
+                                    <input name="choices[1]" onChange={(e) => this.handleOnTemperatureChange(e)} className="form-control" type="radio" value="C" defaultChecked={this.appData.channel.units.temperature === 'C'} />
+                                    ℃
                                 </label>
-                                <label className="btn btn-warning">can be labeled</label>
-                                <label className="btn btn-danger">
-                                    <input name="choices[1]" className="form-control" type="radio" value="0" defaultChecked="checked" />
-                                    <i className="fa fa-check glyphicon glyphicon-remove"></i>
+                                <label className="btn btn-warning"> <i className="fa fa-thermometer-empty"></i> </label>
+                                <label className="btn btn-success">
+                                    <input name="choices[1]" onChange={(e) => this.handleOnTemperatureChange(e)} className="form-control" type="radio" value="F" defaultChecked={this.appData.channel.units.temperature === 'F'} />
+                                    °F
                                 </label>
                             </div>
                         </div>
@@ -47,9 +60,9 @@ class WeatherSettings extends Component {
 }
 
 function mapActionCreaterToProps(dispatch) {
-    return bindActionCreators({ FetchWeather, UpdatePageIndex }, dispatch)
+    return bindActionCreators({ isLoading, FetchWeather, UpdatePageIndex }, dispatch)
 }
-const mapStateToProps = ({ pageIndex }) => ({ pageIndex })
+const mapStateToProps = ({ pageIndex, weather, showLoading }) => ({ pageIndex, weather, showLoading })
 
 export default connect(
     mapStateToProps, mapActionCreaterToProps
