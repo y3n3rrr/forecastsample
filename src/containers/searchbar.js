@@ -19,7 +19,7 @@ class SearchBar extends Component {
         if (location.length === 0)
             return;
         this.props.isLoading(true)
-        this.props.FetchWeather({ city: this.state.term, countrycode: 'de', temperature: 'C' }) //default search settings 
+        this.props.FetchWeather({ city: this.state.term, temperature: 'C' }) //default search settings 
     }
 
     render() {

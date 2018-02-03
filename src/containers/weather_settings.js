@@ -20,7 +20,7 @@ class WeatherSettings extends Component {
     handleOnTemperatureChange = (e) => {
         const { city } = this.appData.channel.location
         this.props.isLoading(true)
-        this.props.FetchWeather({ city: city, countrycode: 'de', temperature: e.target.value })
+        this.props.FetchWeather({ city: city, temperature: e.target.value })
     }
 
     prevButton() {
