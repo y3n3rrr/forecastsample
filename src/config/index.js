@@ -27,3 +27,5 @@ export default {
         enabled: true
     }
 }
+
+export const weather_images = { "Sunny": "Sunny.png", "Cloudy": "Cloudy.png", "PartlyCloudy": "Partly Cloudy.png", "MostlyCloudy": "Mostly Cloudy.png", "MostlySunny": "Mostly Sunny.png", "RainAndSnow": "Rain And Snow.png", "RainAndSunny": "Rain And Sunny.gif", "ScatteredShowers": "Scattered Showers.gif", "Showers": "Showers.gif", "Rain": "Rain.png" }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAverage } from '../utility'
+import { weather_images } from '../config'
 
 class WeatherCard extends Component {
     constructor(props) {
         super(props)
-        this.weatherImages = { "Sunny": "Sunny.png", "Cloudy": "Cloudy.png", "PartlyCloudy": "Partly Cloudy.png", "MostlyCloudy": "Mostly Cloudy.png", "MostlySunny": "Mostly Sunny.png", "RainAndSnow": "Rain And Snow.png", "RainAndSunny": "Rain And Sunny.gif", "ScatteredShowers": "Scattered Showers.gif", "Showers": "Showers.gif", "Rain": "Rain.png" }
+        this.weatherImages = weather_images;
         this.weatherImgUrl = "assets/img/unknown.png"
         if (this.weatherImages[this.props.text])
             this.weatherImgUrl = "assets/img/" + this.weatherImages[this.props.text]
